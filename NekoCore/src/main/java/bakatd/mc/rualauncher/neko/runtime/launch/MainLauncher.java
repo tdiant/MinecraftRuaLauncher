@@ -53,8 +53,6 @@ public class MainLauncher {
                     //isRun = new RuleChecker(ruleUnit).check(launcherCore.getFeatureMap());
                 }
 
-                if(!isRun)
-                    System.out.println(libraryUnit.getName() + " is passed");
                 if(!isRun) continue;
 
                 String cpUnit = VersionManager.getUrlOfLibraries() + libraryUnit.getPath();
@@ -76,6 +74,7 @@ public class MainLauncher {
                 for(RuleUnit ruleUnit : argumentUnit.getRuleUnit()){
                     if(!new RuleChecker(ruleUnit).check(launcherCore.getFeatureMap()))
                         isRun = false;
+                    //isRun = new RuleChecker(ruleUnit).check(launcherCore.getFeatureMap());
                 }
 
                 if(!isRun) continue;

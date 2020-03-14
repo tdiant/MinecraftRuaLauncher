@@ -5,7 +5,7 @@ import java.math.BigInteger;
 public class PatchDownloadUnit {
     private String name;
     private String sha1;
-    private BigInteger size;
+    private BigInteger size = new BigInteger(0+"");
     private String url;
     private String path;
 

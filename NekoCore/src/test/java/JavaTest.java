@@ -1,16 +1,18 @@
 import bakatd.mc.rualauncher.neko.LauncherCore;
 import bakatd.mc.rualauncher.neko.fuck.FFuck;
+import bakatd.mc.rualauncher.neko.manager.VersionManager;
 import com.alibaba.fastjson.JSONObject;
+
+import java.io.File;
 
 public class JavaTest {
     public static void main(String[] args) throws Exception {
+        VersionManager.init("G:\\MC\\.minecraft\\");
+        System.out.println(VersionManager.refreshVersions());
+
         LauncherCore core = new LauncherCore(
-                "G:\\MC\\.minecraft\\",
-                "D:\\Java\\jdk1.8.0_201\\bin\\",
-                "G:\\MC\\.minecraft\\libraries\\",
-                "G:\\MC\\.minecraft\\versions\\1.15.2\\natives\\",
-                "1.15.2",
-                JSONObject.parseObject(FFuck.fuckFile("G:\\MC\\.minecraft\\versions\\1.15.2\\1.15.2.json"))
+                VersionManager.getGameVersionByName("1.15.2"),
+                "D:\\Java\\jdk1.8.0_201\\bin\\"
         );
         core.setLauncherBrand("RuaLauncher");
         core.setLauncherVersion("0.0.1_beta");
@@ -28,5 +30,10 @@ public class JavaTest {
 
 
         core.startGame();
+    }
+
+    public static void main1(String[] args){
+        for(File f:new File("G:\\MC\\.minecraft\\versions\\").listFiles())
+            System.out.println(f.getName());
     }
 }

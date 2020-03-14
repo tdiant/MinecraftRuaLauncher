@@ -12,6 +12,7 @@ public class NewArgumentReader {
     private JSONArray argumentsJsons;
 
     public NewArgumentReader(JSONArray argumentsJson) {
+        //System.out.println(argumentsJson);
         this.argumentsJsons = argumentsJson;
     }
 

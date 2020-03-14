@@ -39,6 +39,24 @@ public class LibraryUnit {
         return path;
     }
 
+    public String getDirPath(){
+        String path = "";
+        //dir
+        String[] args = getName().split(":");
+        path += args[0].replace(".", File.separator) + File.separator;
+        path += args[1].replace(".", File.separator) + File.separator;
+        path += args[2] + File.separator;
+        return path;
+    }
+
+    public String getFileName(){
+        String path = "";
+        String[] args = getName().split(":");
+        //file name
+        path += args[1] + "-" + args[2] + ".jar";
+        return path;
+    }
+
     public void setName(String name) {
         this.name = name;
     }

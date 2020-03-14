@@ -1,5 +1,6 @@
 package bakatd.mc.rualauncher.neko;
 
+import bakatd.mc.rualauncher.neko.core.json.GameMasterUnit;
 import bakatd.mc.rualauncher.neko.core.version.GameVersion;
 import bakatd.mc.rualauncher.neko.runtime.json.MainReader;
 import bakatd.mc.rualauncher.neko.runtime.launch.MainLauncher;
@@ -18,6 +19,7 @@ public class LauncherCore {
     private GameVersion gameVersion;
 
     private JSONObject mainJson;
+    private GameMasterUnit gameMasterUnit;
 
     private Map<String, Boolean> featureMap = new HashMap<>();
     private Map<String, String> replaceMap = new HashMap<>();
@@ -32,13 +34,20 @@ public class LauncherCore {
 
     public void startGame() throws Exception {
         String str = new MainLauncher(
-                new MainReader(mainJson).read(),
+                getGameMasterUnit(),
                 this
         ).launcher();
 
-        /*Runtime run = Runtime.getRuntime();
-        Process p = run.exec(str);*/
+        Runtime run = Runtime.getRuntime();
+        Process p = run.exec(str);
+        //
         System.out.println(str);
+    }
+
+    public GameMasterUnit getGameMasterUnit() throws Exception {
+        if(gameMasterUnit==null)
+            gameMasterUnit = new MainReader(mainJson).read();
+        return gameMasterUnit;
     }
 
     public Map<String, Boolean> getFeatureMap() {
