@@ -1,6 +1,6 @@
 package bakatd.mc.rualauncher.neko.runtime.json;
 
-import bakatd.mc.rualauncher.neko.core.*;
+import bakatd.mc.rualauncher.neko.core.json.*;
 import bakatd.mc.rualauncher.neko.fuck.PFuck;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;

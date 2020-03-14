@@ -1,8 +1,8 @@
 package bakatd.mc.rualauncher.neko.runtime.json;
 
-import bakatd.mc.rualauncher.neko.core.LibraryUnit;
-import bakatd.mc.rualauncher.neko.core.PatchDownloadUnit;
-import bakatd.mc.rualauncher.neko.core.RuleUnit;
+import bakatd.mc.rualauncher.neko.core.json.LibraryUnit;
+import bakatd.mc.rualauncher.neko.core.json.PatchDownloadUnit;
+import bakatd.mc.rualauncher.neko.core.json.RuleUnit;
 import bakatd.mc.rualauncher.neko.fuck.PFuck;
 import com.alibaba.fastjson.JSONObject;
 

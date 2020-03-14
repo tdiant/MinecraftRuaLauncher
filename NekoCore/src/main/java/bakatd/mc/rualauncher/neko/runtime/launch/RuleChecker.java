@@ -1,6 +1,6 @@
 package bakatd.mc.rualauncher.neko.runtime.launch;
 
-import bakatd.mc.rualauncher.neko.core.RuleUnit;
+import bakatd.mc.rualauncher.neko.core.json.RuleUnit;
 
 import java.util.List;
 import java.util.Map;
@@ -14,20 +14,39 @@ public class RuleChecker {
     }
 
     public boolean check(){
+        //if(ruleUnit.getAction().equals("disallow")) System.out.println("test");
         if(isNeedCheck(ruleUnit.getOsName()) && (!isSameOSName(System.getProperty("os.name"),ruleUnit.getOsName())))
             return !getActionAttitude(ruleUnit.getAction());
+        //if(ruleUnit.getAction().equals("disallow")) System.out.println("test");
         if(isNeedCheck(ruleUnit.getOsVersion()) && (!Pattern.matches(ruleUnit.getOsVersion(),System.getProperty("os.version"))))
             return !getActionAttitude(ruleUnit.getAction());
+        //if(ruleUnit.getAction().equals("disallow")) System.out.println("test");
         if(isNeedCheck(ruleUnit.getOsArch()) && (!isSameArch(System.getProperty("os.arch"),ruleUnit.getOsArch())))
             return !getActionAttitude(ruleUnit.getAction());
+        //if(ruleUnit.getAction().equals("disallow")) System.out.println("test");
         return getActionAttitude(ruleUnit.getAction());
+
     }
 
     public boolean check(Map<String, Boolean> featuresMap){
-        if(!check())
+        //if(ruleUnit.getAction().equals("disallow")) System.out.println("test");
+        if(isNeedCheck(ruleUnit.getOsName()) && (!isSameOSName(System.getProperty("os.name"),ruleUnit.getOsName())))
             return !getActionAttitude(ruleUnit.getAction());
-
-        for(String checkKey:ruleUnit.getFeaturesMap().keySet()){
+        //if(ruleUnit.getAction().equals("disallow")) System.out.println("test");
+        if(isNeedCheck(ruleUnit.getOsVersion()) && (!Pattern.matches(ruleUnit.getOsVersion(),System.getProperty("os.version"))))
+            return !getActionAttitude(ruleUnit.getAction());
+        //if(ruleUnit.getAction().equals("disallow")) System.out.println("test");
+        if(isNeedCheck(ruleUnit.getOsArch()) && (!isSameArch(System.getProperty("os.arch"),ruleUnit.getOsArch())))
+            return !getActionAttitude(ruleUnit.getAction());
+        //if(ruleUnit.getAction().equals("disallow")) System.out.println("test");
+        for(String checkKey : ruleUnit.getFeaturesMap().keySet()){
+            boolean myself = featuresMap.containsKey("checkKey")?featuresMap.get(checkKey):false;
+            boolean theyNeed = ruleUnit.getFeaturesMap().containsKey(checkKey)?ruleUnit.getFeaturesMap().get(checkKey):false;
+            if(myself!=theyNeed)
+                return !getActionAttitude(ruleUnit.getAction());
+        }
+        return getActionAttitude(ruleUnit.getAction());
+        /*for(String checkKey:ruleUnit.getFeaturesMap().keySet()){
             /*if (featuresMap.get(checkKey)){
                 if(!ruleUnit.getFeaturesMap().containsKey(checkKey))
                     return !getActionAttitude(ruleUnit.getAction());
@@ -40,14 +59,19 @@ public class RuleChecker {
                     return !getActionAttitude(ruleUnit.getAction());
             }*/
 
-            boolean myself = featuresMap.containsKey("checkKey")?featuresMap.get(checkKey):false;
+            /*boolean myself = featuresMap.containsKey("checkKey")?featuresMap.get(checkKey):false;
             boolean theyNeed = ruleUnit.getFeaturesMap().containsKey(checkKey)?ruleUnit.getFeaturesMap().get(checkKey):false;
+
+
 
             if(myself != theyNeed)
                 return !getActionAttitude(ruleUnit.getAction());
         }
 
-        return getActionAttitude(ruleUnit.getAction());
+        if(ruleUnit.getAction().equals("disallow"))
+            System.out.println("test");*/
+
+        //return getActionAttitude(ruleUnit.getAction());
     }
 
     public RuleUnit getRuleUnit() {

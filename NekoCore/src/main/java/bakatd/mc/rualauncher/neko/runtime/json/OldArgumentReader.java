@@ -1,6 +1,6 @@
 package bakatd.mc.rualauncher.neko.runtime.json;
 
-import bakatd.mc.rualauncher.neko.core.ArgumentUnit;
+import bakatd.mc.rualauncher.neko.core.json.ArgumentUnit;
 
 import java.util.ArrayList;
 import java.util.List;

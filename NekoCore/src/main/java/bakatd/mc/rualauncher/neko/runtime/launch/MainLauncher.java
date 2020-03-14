@@ -1,7 +1,8 @@
 package bakatd.mc.rualauncher.neko.runtime.launch;
 
 import bakatd.mc.rualauncher.neko.LauncherCore;
-import bakatd.mc.rualauncher.neko.core.*;
+import bakatd.mc.rualauncher.neko.core.json.*;
+import bakatd.mc.rualauncher.neko.manager.VersionManager;
 
 public class MainLauncher {
     private GameMasterUnit gameMasterUnit;
@@ -44,11 +45,22 @@ public class MainLauncher {
             front += "-Dminecraft.launcher.version=" + launcherCore.getLauncherVersion();*/
 
             //Load CP
-            for(LibraryUnit libraryUnit : patchUnit.getLibraryUnitList()){
-                String cpUnit = launcherCore.getLibDir() + libraryUnit.getPath();
+            for(LibraryUnit libraryUnit : patchUnit.getLibraryUnitList()) {
+                boolean isRun = true;
+                for (RuleUnit ruleUnit : libraryUnit.getRuleUnitList()) {
+                    if (!new RuleChecker(ruleUnit).check(launcherCore.getFeatureMap()))
+                        isRun = false;
+                    //isRun = new RuleChecker(ruleUnit).check(launcherCore.getFeatureMap());
+                }
+
+                if(!isRun)
+                    System.out.println(libraryUnit.getName() + " is passed");
+                if(!isRun) continue;
+
+                String cpUnit = VersionManager.getUrlOfLibraries() + libraryUnit.getPath();
                 cp += cpUnit+";";
             }
-            cp += launcherCore.getHomeDir() + "versions\\" + launcherCore.getGameName()+"\\"+launcherCore.getGameName()+".jar;";
+            cp += VersionManager.getHomeDir() + "versions\\" + launcherCore.getGameVersion().getGameName()+"\\"+launcherCore.getGameVersion().getGameName()+".jar;";
             cp = cp.substring(0, cp.length() - 1);
 
             //Set MainClass
@@ -75,7 +87,7 @@ public class MainLauncher {
             }
         }
 
-        return launcherCore.getJavaBinDir() + "javaw.exe " + front + " -cp " + cp + " " + mainClass + " " + tail;
+        return launcherCore.getJavaBinDir() + "java.exe " + front + " -cp " + cp + " " + mainClass + " " + tail;
 
 
     }
