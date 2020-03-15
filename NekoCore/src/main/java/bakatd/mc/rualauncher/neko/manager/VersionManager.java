@@ -25,7 +25,7 @@ public class VersionManager {
             if(!f.isDirectory()) continue;
             if(!new File(f,f.getName()+".json").exists()) continue;
 
-            gameVersionList.add(new GameVersion(f.getName(),homeDir+"versions\\"+f.getName()+"\\natives"));
+            gameVersionList.add(new GameVersion(f.getName(),homeDir+"versions"+File.separator+f.getName()+File.separator+"natives"));
         }
 
         return gameVersionList;
@@ -52,11 +52,11 @@ public class VersionManager {
     }
 
     public String getUrlOfVersion(GameVersion gameVersion){
-        return VersionManager.getHomeDir()+"versions\\"+ gameVersion.getGameName()+"\\";
+        return VersionManager.getHomeDir()+"versions"+File.separator+ gameVersion.getGameName()+File.separator;
     }
 
     public static String getUrlOfLibraries(){
-        return VersionManager.getHomeDir()+"libraries\\";
+        return VersionManager.getHomeDir()+"libraries"+File.separator;
     }
 
     public static GameVersion getGameVersionByName(String gameName){

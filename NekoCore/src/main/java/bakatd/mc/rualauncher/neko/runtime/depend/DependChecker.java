@@ -21,7 +21,7 @@ public class DependChecker {
 
     public void check() throws Exception {
         boolean isNativeNeedCreate = false;
-        File nativeDir = new File(launcherCore.getGameVersion().getUrlOfNative()+"\\");
+        File nativeDir = new File(launcherCore.getGameVersion().getUrlOfNative()+File.separator);
         if(!nativeDir.exists()) {
             isNativeNeedCreate = true;
             nativeDir.mkdirs();

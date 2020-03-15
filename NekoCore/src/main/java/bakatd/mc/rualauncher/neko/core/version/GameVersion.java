@@ -32,7 +32,7 @@ public class GameVersion {
     }
 
     public JSONObject getMainJson(){
-        String str = FFuck.fuckFile(VersionManager.getHomeDir()+"versions\\"+gameName+"\\"+gameName+".json");
+        String str = FFuck.fuckFile(VersionManager.getHomeDir()+"versions"+File.separator+gameName+File.separator+gameName+".json");
         return JSONObject.parseObject(str);
     }
 

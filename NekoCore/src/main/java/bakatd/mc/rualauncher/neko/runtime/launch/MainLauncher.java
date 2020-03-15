@@ -4,6 +4,8 @@ import bakatd.mc.rualauncher.neko.LauncherCore;
 import bakatd.mc.rualauncher.neko.core.json.*;
 import bakatd.mc.rualauncher.neko.manager.VersionManager;
 
+import java.io.File;
+
 public class MainLauncher {
     private GameMasterUnit gameMasterUnit;
     private LauncherCore launcherCore;
@@ -58,7 +60,7 @@ public class MainLauncher {
                 String cpUnit = VersionManager.getUrlOfLibraries() + libraryUnit.getPath();
                 cp += cpUnit+";";
             }
-            cp += VersionManager.getHomeDir() + "versions\\" + launcherCore.getGameVersion().getGameName()+"\\"+launcherCore.getGameVersion().getGameName()+".jar;";
+            cp += VersionManager.getHomeDir() + "versions"+ File.separator + launcherCore.getGameVersion().getGameName()+File.separator+launcherCore.getGameVersion().getGameName()+".jar;";
             cp = cp.substring(0, cp.length() - 1);
 
             //Set MainClass
